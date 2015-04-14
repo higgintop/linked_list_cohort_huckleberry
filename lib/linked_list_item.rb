@@ -33,8 +33,15 @@ class LinkedListItem
 
   # Comparable method
   def <=>(other)
-  	return self.payload.to_s <=> other.payload.to_s
+    if self.payload.class == other.payload.class
+      return self.payload <=> other.payload
+    else
+      # can be symbol vs. string
+      # can be fixnum vs. string
+      return self.payload.class.to_s <=> other.payload.class.to_s
+    end
   end
+
 
   # reset the === method functionality 
   # Comparable messes it up
