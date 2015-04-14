@@ -2,9 +2,11 @@ class LinkedList
 
 	attr_reader :size
 
-	def initialize
+	def initialize(*items)
 		@size = 0
-		@first_item = nil
+		items.each do |payload|
+			push(payload)
+		end
 	end
 
 	def push(payload)
@@ -13,19 +15,16 @@ class LinkedList
 
 		# size = 0, this lli is first on our list
 		if @size == 0
-			puts " ADD FIRST EVER ITEM TO LIST"
 			lli.next_item = nil
 			@first_item = lli 
 			@size = @size + 1
 		else
 			node = @first_item
 			if node.last? 
-				puts "ADD SECOND ITEM EVER"
 				lli.next_item = nil
 				node.next_item = lli
 				@size = @size + 1
 			else
-				puts "ADD THIRD ITEM OR MORE"
 				until node.last?
 					node = node.next_item
 				end
@@ -90,6 +89,117 @@ class LinkedList
 		end
 	end
 
+
+	# Override brackets
+	def [](index)
+		get(index)
+	end
+
+	def []=(index, val)
+		oldValue = get(index)
+		if @size > 0
+		  node = @first_item
+		  if node.last? and index == 0
+		  	# only one item on list
+		  	node.payload = val
+		  else
+		  	count = 0
+		  	until node.last?
+		  		node = node.next_item
+		  		count += 1
+		  		if (index == count) 
+		  			node.payload = val
+		  		end 		
+		  	end
+		  end
+		end
+	end
+
+
+
+
+	def delete(index)
+
+		if index < 0 or index > @size
+			raise IndexError
+		end
+
+		if @size > 0
+			node = @first_item
+			if node.last? and index == 0
+				@first_item = nil
+				@size -= 1
+			else
+				count = 0
+				# special case - delete index 0
+				if (count == index)
+					@first_item = node.next_item
+				end
+				until node.last?
+					prevNode = node
+					node = node.next_item
+					count += 1
+					if (index == count)
+						nodeToDelete = node
+						nextNode = node.next_item
+						if nextNode.nil?
+						    prevNode.next_item = nil
+						else
+							prevNode.next_item = nextNode
+						end 
+						@size -= 1
+					end
+				end
+			end
+		end
+	end
+
+
+	def index(payload)
+		if @size == 0
+			return nil
+		else
+			index = 0
+			node = @first_item
+			if (node.payload == payload)
+				return index
+			end
+
+			until node.last?
+				node = node.next_item
+				index += 1
+				if (node.payload == payload)
+				  return index
+			    end
+			end
+		end
+	end
+
+
+	def sorted?
+		if @size == 0 or @size == 1
+			return true
+		else
+			node = @first_item
+			nextNode = node.next_item
+	
+			# there are at least 2 things in list
+			until node.last?
+				if node.payload.class == nextNode.payload.class
+					if(node.payload > nextNode.payload)
+						return false
+					end
+				else
+					# different classes
+					if (node.payload.class.to_s < nextNode.payload.class.to_s)
+						return false
+					end
+				end
+				node = node.next_item
+			end
+			return true
+		end
+	end
 
 
 

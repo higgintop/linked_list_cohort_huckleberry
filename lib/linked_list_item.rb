@@ -11,6 +11,9 @@ class LinkedListItem
   	@next_item = next_item
   end
 
+  def payload=(val)
+    @payload = val
+  end
 
   # Setter method for next_item
   def next_item=(nextItem)
