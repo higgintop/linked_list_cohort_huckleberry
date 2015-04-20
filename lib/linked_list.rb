@@ -92,7 +92,6 @@ class LinkedList
 					node = node.next_item
 				end
 				s += node.payload.to_s + " |" 
-
 			end
 		end
 	end
