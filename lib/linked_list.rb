@@ -104,22 +104,11 @@ class LinkedList
 	end
 
 	def []=(index, val)
-		if @size > 0
-		  node = @first_item
-		  if node.last? and index == 0
-		  	# only one item on list
-		  	node.payload = val
-		  else
-		  	count = 0
-		  	until node.last?
-		  		node = node.next_item
-		  		count += 1
-		  		if (index == count) 
-		  			node.payload = val
-		  		end 		
-		  	end
-		  end
+		currentNode = @first_item
+		(index).times do |i|
+			currentNode = currentNode.next_item
 		end
+		currentNode.payload = val
 	end
 
 
