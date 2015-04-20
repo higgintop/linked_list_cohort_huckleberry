@@ -11,6 +11,9 @@ class LinkedList
 		end
 	end
 
+	##########################################
+	# Push item onto linked list
+	##########################################
 	def push(payload)
 		# need to create a new linked list item
 		lli = LinkedListItem.new(payload)
@@ -38,7 +41,10 @@ class LinkedList
 	end
 
 
-
+	##########################################
+	# Get item off of linked list based on 
+	# the index
+	##########################################
 
 	def get(index)
 		# raise error if neg index or 
@@ -121,7 +127,6 @@ class LinkedList
 
 
 	def delete(index)
-
 		if index < 0 or index > @size
 			raise IndexError
 		end
@@ -202,6 +207,8 @@ class LinkedList
 			return true
 		end
 	end
+
+
 
 	def sort! 
 		if !self.sorted?

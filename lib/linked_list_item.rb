@@ -6,9 +6,8 @@ class LinkedListItem
 
 
   # Initialize method called for new
-  def initialize(payload = "defaultPayload", next_item = nil) 
+  def initialize(payload) 
   	@payload = payload
-  	@next_item = next_item
   end
 
   def payload=(val)
@@ -26,11 +25,12 @@ class LinkedListItem
 
   # Last? method
   def last?
-  	if @next_item == nil
-  		return true
-  	else
-  		return false
-  	end
+    return @next_item.nil?
+  	#if @next_item == nil
+  	#	return true
+  	#else
+  	#	return false
+  	#end
   end
 
 
