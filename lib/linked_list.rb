@@ -1,3 +1,5 @@
+require_relative 'linked_list_item'
+
 class LinkedList
 
 	attr_reader :size
@@ -201,9 +203,11 @@ class LinkedList
 		end
 	end
 
-
-
-
+	def sort! 
+		if !self.sorted?
+			#if not sort
+		end
+	end
 
 
 end
