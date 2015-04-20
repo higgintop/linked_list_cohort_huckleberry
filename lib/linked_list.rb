@@ -104,7 +104,6 @@ class LinkedList
 	end
 
 	def []=(index, val)
-		oldValue = get(index)
 		if @size > 0
 		  node = @first_item
 		  if node.last? and index == 0
@@ -131,34 +130,17 @@ class LinkedList
 			raise IndexError
 		end
 
-		if @size > 0
-			node = @first_item
-			if node.last? and index == 0
-				@first_item = nil
-				@size -= 1
-			else
-				count = 0
-				# special case - delete index 0
-				if (count == index)
-					@first_item = node.next_item
-				end
-				until node.last?
-					prevNode = node
-					node = node.next_item
-					count += 1
-					if (index == count)
-						nodeToDelete = node
-						nextNode = node.next_item
-						if nextNode.nil?
-						    prevNode.next_item = nil
-						else
-							prevNode.next_item = nextNode
-						end 
-						@size -= 1
-					end
-				end
+		currentNode = @first_item
+		if index == 0
+			# remove first item
+			@first_item = currentNode.next_item
+		else
+			(index-1).times do |i|
+				currentNode = currentNode.next_item
 			end
+			currentNode.next_item = currentNode.next_item.next_item
 		end
+		@size -= 1
 	end
 
 
