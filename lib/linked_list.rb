@@ -70,11 +70,11 @@ class LinkedList
 
 
 	def last
-		if @size == 0
-			return nil
-		else
-			return get(@size-1)
-		end	
+	  if @size == 0
+	    return nil
+	  else
+		return get(@size-1)
+	  end	
 	end
 
 
